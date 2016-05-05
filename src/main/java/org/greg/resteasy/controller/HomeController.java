@@ -9,17 +9,29 @@ import javax.ws.rs.core.SecurityContext;
 
 import org.greg.resteasy.controller.request.Article;
 import org.greg.resteasy.pojo.response.Helloworld;
+import org.greg.resteasy.service.HelloService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
 @Path("/hello")
 public class HomeController {
 
+	@Autowired
+	private HelloService helloService;
+
 	@GET
 	@Path("/world")
 	@Produces("application/json")
 	public Helloworld helloworld() throws Exception {
 		return new Helloworld("Welcome, HelloWorld");
+	}
+
+	@GET
+	@Path("/world2")
+	@Produces("application/json")
+	public String helloworld2() throws Exception {
+		return helloService.echo("1");
 	}
 
 	@GET
